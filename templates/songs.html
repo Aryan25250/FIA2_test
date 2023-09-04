@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if query %}
+<title>Search - {{query}}</title>
+{% else %}
+<title>Search</title>
+{% endif %}
+<body class="w3-container">
+   <form method="post">
+        <label>Search songs</label>
+        <input type="text" name="search" class="w3-input w3-border"
+            {% if query %}:
+               value="{{ query }}"
+            {% endif %}
+
+               required>
+        <button type="search-button" class="w3-button w3-green">Search</button>
+    </form>
+
+    <br>
+    <br>
+
+   {% if tracks %}
+        <h2>Results</h2>
+        <hr>
+
+        {% for track in tracks %}
+            <img src="{{track['album']['images'][0]['url']}}" style="width:100px;">
+            <br>
+            <a href="{{ url_for('song', id=track['id']) }}">{{track['name']}}</a>
+            <p style="font-size:12px;"> {{track['artists'][0]["name"]}} </p>
+            <hr>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
+
+{% endblock %}

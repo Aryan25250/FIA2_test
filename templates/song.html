@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<title>Song - {{data['album']['name']}}</title>
+<body class="w3-container">
+
+    <img src="{{data['album']['images'][0]['url']}}" style="width:300px;">
+    <h1>
+        {{data["name"]}}
+    </h1>
+    <h3>
+        {{data['artists'][0]["name"]}} • {{data['album']['name']}} • {{data['album']['release_date'][0:4]}}
+    </h3>
+
+    {% if voted %}
+         <form method="post">
+            <button type="search-button" class="w3-button w3-red">Remove Vote</button>
+         </form>
+    {% else %}
+         <form method="post">
+            <button type="search-button" class="w3-button w3-blue">Vote</button>
+         </form>
+    {% endif %}
+
+</body>
+</html>
+
+{% endblock %}
